@@ -43,8 +43,18 @@ def token_user():
     return r.respond({"token": token}, cookie=f"Authorization={token}")
 
 
+@app.route('/status', methods=["GET"])
+@exception_handler("status")
+@token_required
+def status(uid):
+    is_online[0] = ping('192.168.140.17')
+    is_online[1] = ping('192.168.140.12')
+    is_online[2] = ping('192.168.140.11')
+    return r.respond({"status": is_online})
+
+
 @app.route('/toggle/<node>', methods=["POST"])
-@exception_handler("token admin")
+@exception_handler("toggle node")
 @token_required
 def toggle(uid, node):
     if uid == 'admin':
