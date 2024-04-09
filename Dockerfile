@@ -5,4 +5,4 @@ COPY ./util /util
 COPY requirements.txt .
 COPY app.py .
 
-RUN pip install -r reqirements.txt
+RUN pip install -r requirements.txt
